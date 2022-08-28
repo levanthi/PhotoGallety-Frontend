@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Header from './Components/Header';
 import Loading from './Components/Loading';
 import PhotoItems from './Components/PhotoItem';
+
 function App() {
    const [photos, setPhotos] = useState([]);
    const [isLoading, setIsLoading] = useState(true);

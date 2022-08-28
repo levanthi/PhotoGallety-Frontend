@@ -19,16 +19,18 @@ function Header({ photos, setPhotos }) {
       const data = new FormData();
       data.append('photo', photoFile);
       setIsLoading(true);
-      axios.post('http://localhost:3001/upload', data).then((res) => {
-         res.data.data = new Buffer(res.data.data).toString('base64');
-         setPhotos([res.data, ...photos]);
-         setIsLoading(false);
-         notiList.current.push({
-            type: 'success',
-            message: 'Upload successfully!',
-            id: uuidv4(),
+      axios
+         .post('https://photogallerybackend.herokuapp.com/upload', data)
+         .then((res) => {
+            res.data.data = new Buffer(res.data.data).toString('base64');
+            setPhotos([res.data, ...photos]);
+            setIsLoading(false);
+            notiList.current.push({
+               type: 'success',
+               message: 'Upload successfully!',
+               id: uuidv4(),
+            });
          });
-      });
    };
    useEffect(() => {
       if (photoFile) {

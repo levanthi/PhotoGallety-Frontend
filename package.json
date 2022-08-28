@@ -1,6 +1,6 @@
 {
   "name": "frontend",
-  "proxy":"https://photogallerybackend.herokuapp.com/",
+  "proxy": "https://photogallerybackend.herokuapp.com/",
   "version": "0.1.0",
   "homepage": "https://levanthi.github.io/PhotoGallety-Frontend/",
   "private": true,
@@ -15,6 +15,7 @@
     "buffer": "^6.0.3",
     "classnames": "^2.3.1",
     "css-reset-and-normalize": "^2.3.6",
+    "dotenv": "^16.0.1",
     "gh-pages": "^4.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
