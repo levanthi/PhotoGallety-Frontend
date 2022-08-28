@@ -10,7 +10,7 @@ function App() {
    useEffect(() => {
       setIsLoading(true);
       axios
-         .get('http://localhost:3001')
+         .get('/')
          .then((res) => {
             const apiPhotos = res.data;
             apiPhotos.forEach((photo) => {
