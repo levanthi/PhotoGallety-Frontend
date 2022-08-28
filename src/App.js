@@ -10,9 +10,9 @@ function App() {
    useEffect(() => {
       setIsLoading(true);
       axios
-         .get('/')
+         .get('https://photogallerybackend.herokuapp.com/')
          .then((res) => {
-            const apiPhotos = res.data;
+            const apiPhotos = res.data || [];
             apiPhotos.forEach((photo) => {
                photo.data = new Buffer(photo.data).toString('base64');
             });

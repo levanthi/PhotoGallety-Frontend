@@ -1,9 +1,9 @@
 {
   "name": "frontend",
+  "proxy":"https://photogallerybackend.herokuapp.com/",
   "version": "0.1.0",
   "homepage": "https://levanthi.github.io/PhotoGallety-Frontend/",
   "private": true,
-  "proxy":"https://photogallerybackend.herokuapp.com",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.1.2",
     "@fortawesome/free-solid-svg-icons": "^6.1.2",
