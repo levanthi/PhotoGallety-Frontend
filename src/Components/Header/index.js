@@ -29,7 +29,7 @@ function Header({ photos, setPhotos }) {
          });
       }
       axios
-         .post(`https://photogallerybackend.herokuapp.com/upload${path}`, data)
+         .post(`https://photogallerybackend.herokuapp.com${path}`, data)
          .then((res) => {
             if (Array.isArray(res.data)) {
                const newPhoto = res.data;
