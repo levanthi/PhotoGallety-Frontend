@@ -17,7 +17,7 @@ function PhotoItems({ src, id }) {
       <>
          {showDetail && (
             <>
-               <DetailPhoto src={src} />
+               <DetailPhoto src={src} id={id} closeDetail={toggleViewDetail} />
                <Overlay closeOverlay={toggleViewDetail} />
             </>
          )}

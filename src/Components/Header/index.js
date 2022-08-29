@@ -1,9 +1,10 @@
 import classNames from 'classnames/bind';
 import { Buffer } from 'buffer';
 import axios from 'axios';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
+import { Context } from '../../App';
 import styles from './header.module.scss';
 import images from '../../assets/images';
 import Loading from '../Loading';
@@ -14,7 +15,7 @@ const cx = classNames.bind(styles);
 function Header({ photos, setPhotos }) {
    const [photoFile, setPhotoFile] = useState();
    const [isLoading, setIsLoading] = useState(false);
-   const notiList = useRef([]);
+   const { notiList, setNotiList } = useContext(Context);
    const handleSubmit = () => {
       const data = new FormData();
       setIsLoading(true);
@@ -29,6 +30,7 @@ function Header({ photos, setPhotos }) {
          });
       }
       axios
+         // .post(`http://localhost:3001${path}`, data)
          .post(`https://photogallerybackend.herokuapp.com${path}`, data)
          .then((res) => {
             if (Array.isArray(res.data)) {
@@ -42,11 +44,14 @@ function Header({ photos, setPhotos }) {
                setPhotos([res.data, ...photos]);
             }
             setIsLoading(false);
-            notiList.current.push({
-               type: 'success',
-               message: 'Upload successfully!',
-               id: uuidv4(),
-            });
+            setNotiList((pre) => [
+               ...pre,
+               {
+                  type: 'success',
+                  message: 'Upload successfully!',
+                  id: uuidv4(),
+               },
+            ]);
          });
    };
    useEffect(() => {
@@ -57,11 +62,11 @@ function Header({ photos, setPhotos }) {
    return (
       <>
          {isLoading && <Loading position="fixed" />}
-         {notiList.current.map((notify) => {
+         {notiList.map((notify) => {
             return (
                <Notification
                   id={notify.id}
-                  notiList={notiList}
+                  setNotiList={setNotiList}
                   key={notify.id}
                   type={notify.type}
                   message={notify.message}

@@ -27,18 +27,24 @@
       transform: translate(-50%, -50%);
    }
 }
-.download-icon {
+.download-icon,
+.remove-icon {
    width: 30px;
    height: 30px;
    position: absolute;
    z-index: 9999;
    top: 0;
    left: 50%;
-   transform: translate(-50%, -100%);
+   transform: translate(-50%, calc(-100% - 6px));
    cursor: pointer;
-
    path {
-      fill: white;
+      fill: black;
+   }
+}
+.remove-icon {
+   transform: translate(100%, calc(-100% - 6px));
+   path {
+      fill: red;
    }
 }
 

@@ -9,7 +9,7 @@ import styles from './notification.module.scss';
 
 const cx = classNames.bind(styles);
 
-function Notification({ type, message, notiList, id }) {
+function Notification({ type, message, setNotiList, id }) {
    let cssConfig = {};
    let icon;
    switch (type) {
@@ -32,8 +32,11 @@ function Notification({ type, message, notiList, id }) {
    const timerIdRef = useRef(0);
    const notiRef = useRef();
    const closeNotify = (id) => {
-      notiList.current = notiList.current.filter((noti) => {
-         return noti.id !== id;
+      setNotiList((pre) => {
+         const newNotiList = pre.filter((noti) => {
+            return noti.id !== id;
+         });
+         return newNotiList;
       });
    };
    const handleClose = () => {
