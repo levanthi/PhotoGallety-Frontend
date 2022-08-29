@@ -1,6 +1,5 @@
 {
   "name": "frontend",
-  "proxy": "https://photogallerybackend.herokuapp.com/",
   "version": "0.1.0",
   "homepage": "https://levanthi.github.io/PhotoGallety-Frontend/",
   "private": true,
@@ -31,6 +30,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
+  "proxy": "http://localhost:3001",
   "eslintConfig": {
     "extends": [
       "react-app",

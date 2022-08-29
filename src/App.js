@@ -29,7 +29,9 @@ function App() {
          <div className="row body">
             {isLoading && <Loading position="absolute" />}
             {photos.map((item, index) => {
-               return <PhotoItems src={item.data} key={item._id} />;
+               return (
+                  <PhotoItems src={item.data} key={item._id} id={item._id} />
+               );
             })}
          </div>
       </>

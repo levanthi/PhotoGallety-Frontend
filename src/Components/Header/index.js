@@ -17,13 +17,30 @@ function Header({ photos, setPhotos }) {
    const notiList = useRef([]);
    const handleSubmit = () => {
       const data = new FormData();
-      data.append('photo', photoFile);
       setIsLoading(true);
+      let path = '';
+      if (photoFile.length === 1) {
+         path = '/upload';
+         data.append('photo', photoFile[0]);
+      } else {
+         path = '/uploads';
+         photoFile.forEach((file) => {
+            data.append('photo', file);
+         });
+      }
       axios
-         .post('https://photogallerybackend.herokuapp.com/upload', data)
+         .post(`https://photogallerybackend.herokuapp.com/upload${path}`, data)
          .then((res) => {
-            res.data.data = new Buffer(res.data.data).toString('base64');
-            setPhotos([res.data, ...photos]);
+            if (Array.isArray(res.data)) {
+               const newPhoto = res.data;
+               newPhoto.forEach((photo) => {
+                  photo.data = new Buffer(photo.data).toString('base64');
+               });
+               setPhotos([...newPhoto, ...photos]);
+            } else {
+               res.data.data = new Buffer(res.data.data).toString('base64');
+               setPhotos([res.data, ...photos]);
+            }
             setIsLoading(false);
             notiList.current.push({
                type: 'success',
@@ -63,8 +80,9 @@ function Header({ photos, setPhotos }) {
                      type={'file'}
                      id={'choose-file'}
                      value={''}
+                     multiple
                      onChange={(e) => {
-                        setPhotoFile(e.target.files[0]);
+                        setPhotoFile([...e.target.files]);
                      }}
                   />
                </form>
